@@ -55,7 +55,7 @@ public class Health_Damage_collisions : MonoBehaviour {
                 Debug.Log("its an orc!");
                 col.gameObject.transform.parent.GetComponent<Orc>().TakeRecoilDamage();
             }
-            damageable = false;
+            //damageable = false;
         }
         else if (col.gameObject.tag == "heal")
 		{
@@ -77,7 +77,7 @@ public class Health_Damage_collisions : MonoBehaviour {
 
     void OnCollisionExit(Collision col)
     {
-        damageable = true;
+        //damageable = true;
     }
 
 

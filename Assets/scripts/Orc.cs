@@ -55,9 +55,9 @@ public class Orc : MonoBehaviour {
     IEnumerator MoveBack()
     {
         float timer = 0.0f;
-        while (timer < 1.0f)
+        while (timer < 0.5f)
         {
-            this.transform.Translate(0, 0, -0.03f);
+            this.transform.Translate(0, 0, -0.25f);
             timer += Time.deltaTime;
             canAttack = true;
             yield return null;
@@ -100,9 +100,10 @@ public class Orc : MonoBehaviour {
                                             Quaternion.LookRotation(direction), 0.1f);
 
                 animator.SetBool("isIdle", false);
-                if (direction.magnitude > 5 && !animator.GetCurrentAnimatorStateInfo(0).IsName("Damage"))
+                if (direction.magnitude > 15 && !animator.GetCurrentAnimatorStateInfo(0).IsName("Damage"))
                 {
-                    this.transform.Translate(0, 0, 0.03f);
+                    if(canAttack)
+                        this.transform.Translate(0, 0, 0.03f);
                     animator.SetBool("isWalking", true);
                     animator.SetBool("isAttacking", false);
 
