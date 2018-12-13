@@ -84,11 +84,14 @@ public class Orc : MonoBehaviour {
                 updatedScore = true;
             }
 
-            //Temporary Respawn enemy if R was pressed
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                RespawnEnemy();
-            }
+            Health = -10.0f;
+            Destroy(gameObject, 1.0f);
+
+            // //Temporary Respawn enemy if R was pressed
+            // if (Input.GetKeyDown(KeyCode.R))
+            // {
+            //     RespawnEnemy();
+            // }
 
         }
         //Moving and Attaking

@@ -34,7 +34,10 @@ public class ScoreManager : MonoBehaviour {
         if(deltaTime > 1.0f)
         {
             //score -= (int)deltaTime;
-            score += (int)deltaTime;
+            if(!GameObject.Find("Necromancer").GetComponent<Health_Damage_collisions>().IsPlayerDead)
+            {
+                score += (int)deltaTime;
+            }
             deltaTime = 0.0f;
         }
 	}

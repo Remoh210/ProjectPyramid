@@ -59,11 +59,14 @@ public class Enemy : MonoBehaviour
             }
 
             //Temporary Respawn enemy if R was pressed
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                RespawnEnemy();
-            }
-            
+            //if (Input.GetKeyDown(KeyCode.R))
+            //{
+            //    RespawnEnemy();
+            //}
+
+            Health = -10.0f;
+            Destroy(gameObject, 1.0f);
+
         }
 
 
