@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour {
 
-    int score = 500;
+    //int score = 500;
+    int score = 0;
 
     float deltaTime = 0.0f;
 
@@ -21,17 +22,25 @@ public class ScoreManager : MonoBehaviour {
 	void Update () {
         if(score >= 0)
         {
-            textbox.GetComponent<Text>().text = "Year: " + score.ToString() + " AD";
+            textbox.GetComponent<Text>().text = "Score: " + score.ToString();
+            //textbox.GetComponent<Text>().text = "Year: " + score.ToString() + " AD";
         }
         else
         {
-            textbox.GetComponent<Text>().text = "Year: " + Mathf.Abs(score).ToString() + " BC";
+            //textbox.GetComponent<Text>().text = "Year: " + Mathf.Abs(score).ToString() + " BC";
         }
-        deltaTime += 0.1f;
+        //deltaTime += 0.1f;
+        deltaTime += 0.2f;
         if(deltaTime > 1.0f)
         {
-            score -= (int)deltaTime;
+            //score -= (int)deltaTime;
+            score += (int)deltaTime;
             deltaTime = 0.0f;
         }
 	}
+
+    public void IncreaseScore(int amount)
+    {
+        score += amount;
+    }
 }

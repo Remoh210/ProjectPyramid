@@ -12,6 +12,7 @@ public class Orc : MonoBehaviour {
     private Quaternion StartRotation;
     bool IsEnemyDead = false;
     bool canAttack = true;
+    bool updatedScore = false;
 
     // Use this for initialization
     void Start()
@@ -73,7 +74,16 @@ public class Orc : MonoBehaviour {
         if (Health <= 0)
         {
             IsEnemyDead = true;
+            BoxCollider collider = GameObject.Find("Collider").GetComponent<BoxCollider>();
+            collider.enabled = false;
             animator.Play("Death", -1, 0.8f);
+
+            if (!updatedScore)
+            {
+                GameObject.Find("Score").GetComponent<ScoreManager>().IncreaseScore(15);
+                updatedScore = true;
+            }
+
             //Temporary Respawn enemy if R was pressed
             if (Input.GetKeyDown(KeyCode.R))
             {
@@ -81,11 +91,8 @@ public class Orc : MonoBehaviour {
             }
 
         }
-
-
-
         //Moving and Attaking
-        if (!IsEnemyDead)
+        else if (!IsEnemyDead)
         {
             Vector3 direction = player.position - this.transform.position;
             float angle = Vector3.Angle(direction, this.transform.forward);

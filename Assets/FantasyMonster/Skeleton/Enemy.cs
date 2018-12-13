@@ -6,11 +6,12 @@ public class Enemy : MonoBehaviour
 
     public Transform player;
     [Range(1.0f, 100.0f)]
-    public float Health = 100.0f;
+    public float Health = 200.0f;
     static Animator animator;
     private Vector3 StartPosition;
     private Quaternion StartRotation;
     bool IsEnemyDead = false;
+    bool updatedScore = false;
 
     // Use this for initialization
     void Start()
@@ -27,6 +28,7 @@ public class Enemy : MonoBehaviour
         this.transform.position = StartPosition;
         animator.SetBool("isEnemyDead", IsEnemyDead);
         Health = 100.0f;
+        updatedScore = false;
     }
 
     //ENEMY DAMAGE COLLIDER
@@ -49,6 +51,13 @@ public class Enemy : MonoBehaviour
         {
             IsEnemyDead = true;
             animator.Play("Death", -1, 0.8f);
+
+            if(!updatedScore)
+            {
+                GameObject.Find("Score").GetComponent<ScoreManager>().IncreaseScore(30);
+                updatedScore = true;
+            }
+
             //Temporary Respawn enemy if R was pressed
             if (Input.GetKeyDown(KeyCode.R))
             {
