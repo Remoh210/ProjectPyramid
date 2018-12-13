@@ -29,7 +29,7 @@ public class Health_Damage_collisions : MonoBehaviour {
         //transform.rotation = StartRot;
         //  GetComponent<Animator>().Play("LOSE00", -1, 0f);
         IsPlayerDead = true;
-        GetComponent<Animator>().SetBool("IsDead", IsPlayerDead);
+        this.gameObject.transform.GetComponent<Animator>().SetBool("IsDead", IsPlayerDead);
         
 
     }
@@ -52,7 +52,7 @@ public class Health_Damage_collisions : MonoBehaviour {
 
             if (col.gameObject.transform.parent.tag == "Orc")
             {
-                Debug.Log("its an orc!");
+                //Debug.Log("its an orc!");
                 col.gameObject.transform.parent.GetComponent<Orc>().TakeRecoilDamage();
             }
             //damageable = false;
@@ -71,7 +71,7 @@ public class Health_Damage_collisions : MonoBehaviour {
     {
         if (stay_col.gameObject.tag == "damage")
         {
-            Healthbar.value -= .011f;
+            //Healthbar.value -= .011f;
         }
     }
 
@@ -93,15 +93,15 @@ public class Health_Damage_collisions : MonoBehaviour {
     void Update () {
         if (Healthbar.value <= 0.03)
         {
-            Respawn();
-            if (Input.GetKeyDown("up"))
-            {
-                IsPlayerDead = false;
-                GetComponent<Animator>().SetBool("IsDead", IsPlayerDead);
-                transform.position = StartPos;
-                transform.rotation = StartRot;
-                Healthbar.value = 0.2f;
-            }
+            //Respawn();
+            //if (Input.GetKeyDown("up"))
+            //{
+            //    IsPlayerDead = false;
+            //    GetComponent<Animator>().SetBool("IsDead", IsPlayerDead);
+            //    transform.position = StartPos;
+            //    transform.rotation = StartRot;
+            //    Healthbar.value = 0.2f;
+            //}
 
         }
 

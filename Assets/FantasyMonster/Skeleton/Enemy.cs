@@ -13,13 +13,18 @@ public class Enemy : MonoBehaviour
     bool IsEnemyDead = false;
     bool updatedScore = false;
 
-    // Use this for initialization
-    void Start()
+    void Awake()
     {
-        animator = GetComponent<Animator>();
+        animator = this.gameObject.GetComponent<Animator>();
         //
         StartPosition = this.transform.position;
         StartRotation = this.transform.rotation;
+    }
+
+    // Use this for initialization
+    void Start()
+    {
+
     }
     //RESPAWN
     void RespawnEnemy()
@@ -41,6 +46,20 @@ public class Enemy : MonoBehaviour
         }
     }
 
+
+    public void ResetValues()
+    {
+        IsEnemyDead = false;
+        updatedScore = false;
+        animator = this.gameObject.GetComponent<Animator>();
+        animator.SetBool("isEnemyDead", IsEnemyDead);
+        Health = 100.0f;
+
+        //
+        StartPosition = this.transform.position;
+        StartRotation = this.transform.rotation;
+    }
+
     //ENEMY DEATH 
 
     // Update is called once per frame
@@ -49,13 +68,14 @@ public class Enemy : MonoBehaviour
         //Check Health and die if = 0
         if(Health <= 0)
         {
-            IsEnemyDead = true;
-            animator.Play("Death", -1, 0.8f);
-
             if(!updatedScore)
             {
                 GameObject.Find("Score").GetComponent<ScoreManager>().IncreaseScore(30);
                 updatedScore = true;
+                IsEnemyDead = true;
+                animator.Play("Death");
+                Health = -10.0f;
+                Destroy(gameObject, 1.0f);
             }
 
             //Temporary Respawn enemy if R was pressed
@@ -63,10 +83,6 @@ public class Enemy : MonoBehaviour
             //{
             //    RespawnEnemy();
             //}
-
-            Health = -10.0f;
-            Destroy(gameObject, 1.0f);
-
         }
 
 

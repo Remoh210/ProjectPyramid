@@ -34,29 +34,32 @@ public class EnemyManager : MonoBehaviour {
 
         if(orcTimer > orcCheck)
         {
-            GameObject newOrc = Instantiate(orc);
-            newOrc.transform.position = this.transform.position;
+            orc.GetComponent<Orc>().ResetValues();
+            GameObject newOrc = Instantiate(orc.gameObject) as GameObject;
+            newOrc.GetComponent<Orc>().ResetValues();
+            //newOrc.transform.position = this.transform.position;
             newOrc.GetComponent<Orc>().player = GameObject.Find("Necromancer").transform;
             orcTimer = 0.0f;
         }
 
         if (skeleTimer > skeleCheck)
         {
-            GameObject newSkeleton = Instantiate(skeleton);
+            GameObject newSkeleton = Instantiate(skeleton,null);
+            newSkeleton.GetComponent<Enemy>().ResetValues();
             newSkeleton.transform.position = this.transform.position;
             newSkeleton.GetComponent<Enemy>().player = GameObject.Find("Necromancer").transform;
             skeleTimer = 0.0f;
         }
 
-        if(orcScore - (orcScore % 25) > 0) //decrease time limit for orc spawns if score is high enough
+        if(orcScore - (orcScore % 20) > 0) //decrease time limit for orc spawns if score is high enough
         {
-            orcCheck *= 0.9f;
+            orcCheck *= 0.95f;
             orcScore = 0;
         }
 
-        if (skeleScore - (skeleScore % 50) > 0) //decrease time limit for skeleton spawns if score is high enough
+        if (skeleScore - (skeleScore % 40) > 0) //decrease time limit for skeleton spawns if score is high enough
         {
-            skeleCheck *= 0.9f;
+            skeleCheck *= 0.95f;
             skeleScore = 0;
         }
     }

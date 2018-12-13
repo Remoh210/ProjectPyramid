@@ -10,12 +10,15 @@ public class ScoreManager : MonoBehaviour {
 
     float deltaTime = 0.0f;
 
+    Image blackscreen;
+
     GameObject textbox;
 
 	// Use this for initialization
 	void Start () {
         textbox = GameObject.Find("Score");
         deltaTime = 0.0f;
+        blackscreen = this.gameObject.transform.parent.Find("BlackScreen").GetComponent<Image>();
 	}
 	
 	// Update is called once per frame

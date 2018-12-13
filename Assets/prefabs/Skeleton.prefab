@@ -1238,7 +1238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a984a32d3208d4646a8e0855e99d0161, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 4476169102882232, guid: fd5204067878a3e429c6730f16662031, type: 2}
   Health: 100
 --- !u!136 &136477788660205284
 CapsuleCollider:

@@ -6,7 +6,7 @@ public class Orc : MonoBehaviour {
 
     public Transform player;
     [Range(1.0f, 100.0f)]
-    public float Health = 100.0f;
+    float Health = 100.0f;
     static Animator animator;
     private Vector3 StartPosition;
     private Quaternion StartRotation;
@@ -14,13 +14,25 @@ public class Orc : MonoBehaviour {
     bool canAttack = true;
     bool updatedScore = false;
 
-    // Use this for initialization
-    void Start()
+    void Awake()
     {
-        animator = GetComponent<Animator>();
+        IsEnemyDead = false;
+        canAttack = true;
+        updatedScore = false;
+        animator = this.gameObject.GetComponent<Animator>();
+        animator.SetBool("isEnemyDead", IsEnemyDead);
+        animator.Play("Idle");
+        Health = 100.0f;
+
         //
         StartPosition = this.transform.position;
         StartRotation = this.transform.rotation;
+    }
+
+    // Use this for initialization
+    void Start()
+    {
+
     }
     //RESPAWN
     void RespawnEnemy()
@@ -37,6 +49,7 @@ public class Orc : MonoBehaviour {
         if (col.gameObject.tag == "enemyHit" && Health > 0)
         {
             TakeDamage(25.0f);
+            //Destroy(col.gameObject);
         }
     }
 
@@ -65,6 +78,22 @@ public class Orc : MonoBehaviour {
         }
     }
 
+    public void ResetValues()
+    {
+        IsEnemyDead = false;
+        canAttack = true;
+        updatedScore = false;
+        animator = this.gameObject.GetComponent<Animator>();
+        animator.SetBool("isEnemyDead", false);
+        animator.StopPlayback();
+        animator.Play("Idle");
+        Health = 100.0f;
+
+        //
+        StartPosition = this.transform.position;
+        StartRotation = this.transform.rotation;
+    }
+
     //ENEMY DEATH 
 
     // Update is called once per frame
@@ -73,20 +102,17 @@ public class Orc : MonoBehaviour {
         //Check Health and die if = 0
         if (Health <= 0)
         {
-            IsEnemyDead = true;
-            BoxCollider collider = GameObject.Find("Collider").GetComponent<BoxCollider>();
-            collider.enabled = false;
-            animator.Play("Death", -1, 0.8f);
-
             if (!updatedScore)
             {
                 GameObject.Find("Score").GetComponent<ScoreManager>().IncreaseScore(15);
                 updatedScore = true;
+                IsEnemyDead = true;
+                BoxCollider collider = this.gameObject.transform.Find("Collider").GetComponent<BoxCollider>();
+                collider.enabled = false;
+                animator.Play("Death");
+                Health = -10.0f;
+                Destroy(gameObject, 1.2f);
             }
-
-            Health = -10.0f;
-            Destroy(gameObject, 1.0f);
-
             // //Temporary Respawn enemy if R was pressed
             // if (Input.GetKeyDown(KeyCode.R))
             // {
@@ -95,12 +121,12 @@ public class Orc : MonoBehaviour {
 
         }
         //Moving and Attaking
-        else if (!IsEnemyDead)
+        if (!IsEnemyDead)
         {
             Vector3 direction = player.position - this.transform.position;
             float angle = Vector3.Angle(direction, this.transform.forward);
 
-            BoxCollider collider = GameObject.Find("Collider").GetComponent<BoxCollider>();
+            BoxCollider collider = this.gameObject.transform.Find("Collider").GetComponent<BoxCollider>();
             if (Vector3.Distance(player.position, this.transform.position) < 50 && angle < 40)
             {
 
@@ -110,6 +136,12 @@ public class Orc : MonoBehaviour {
                                             Quaternion.LookRotation(direction), 0.1f);
 
                 animator.SetBool("isIdle", false);
+                if(animator.GetCurrentAnimatorStateInfo(0).IsName("Dead"))
+                {
+                    animator.SetBool("isDead", false);
+                    animator.StopPlayback();
+                    animator.Play("Idle");
+                }
                 if (direction.magnitude > 15 && !animator.GetCurrentAnimatorStateInfo(0).IsName("Damage"))
                 {
                     if(canAttack)
