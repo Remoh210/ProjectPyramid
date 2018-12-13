@@ -43,4 +43,9 @@ public class ScoreManager : MonoBehaviour {
     {
         score += amount;
     }
+
+    public int GetScore()
+    {
+        return score;
+    }
 }
