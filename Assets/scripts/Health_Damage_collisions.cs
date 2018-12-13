@@ -14,6 +14,8 @@ public class Health_Damage_collisions : MonoBehaviour {
     private Vector3 StartPos;
     private Quaternion StartRot;
 
+    bool damageable = true;
+
 
     void Start () {
 
@@ -42,11 +44,18 @@ public class Health_Damage_collisions : MonoBehaviour {
 
     private void OnTriggerEnter(Collider col)
     {
-        if(col.gameObject.tag == "hit" )
+        if(col.gameObject.tag == "hit" && damageable)
         {
 			Healthbar.value -= 0.05f;
             SpawnParticles();
             // GetComponent<Animator>().Play("DAMAGED01");
+
+            if (col.gameObject.transform.parent.tag == "Orc")
+            {
+                Debug.Log("its an orc!");
+                col.gameObject.transform.parent.GetComponent<Orc>().TakeRecoilDamage();
+            }
+            damageable = false;
         }
         else if (col.gameObject.tag == "heal")
 		{
@@ -66,6 +75,10 @@ public class Health_Damage_collisions : MonoBehaviour {
         }
     }
 
+    void OnCollisionExit(Collision col)
+    {
+        damageable = true;
+    }
 
 
 
