@@ -45,6 +45,7 @@ public class Enemy : MonoBehaviour
             animator.Play("Damage");
             AudioSource[] fireAudio = col.gameObject.GetComponents<AudioSource>();
             fireAudio[1].Play();
+            this.gameObject.GetComponent<AudioSource>().Play();
         }
     }
 

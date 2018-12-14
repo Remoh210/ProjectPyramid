@@ -56,6 +56,7 @@ public class Health_Damage_collisions : MonoBehaviour {
                 col.gameObject.transform.parent.GetComponent<Orc>().TakeRecoilDamage();
             }
             //damageable = false;
+            this.gameObject.GetComponent<AudioSource>().Play();
         }
         else if (col.gameObject.tag == "heal")
 		{

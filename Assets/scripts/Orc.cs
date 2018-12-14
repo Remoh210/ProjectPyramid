@@ -56,6 +56,7 @@ public class Orc : MonoBehaviour {
     void TakeDamage(float amount)
     {
         Health -= amount;
+        this.gameObject.GetComponent<AudioSource>().Play();
     }
 
     public void TakeRecoilDamage()
