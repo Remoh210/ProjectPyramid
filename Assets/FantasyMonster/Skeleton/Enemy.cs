@@ -6,7 +6,11 @@ public class Enemy : MonoBehaviour
 
     public Transform player;
     [Range(1.0f, 100.0f)]
-    public float Health = 200.0f;
+    public float Health = 100.0f;
+    [Range(1.0f, 100.0f)]
+    public float Range = 20.0f;
+    [Range(1.0f, 360.0f)]
+    public float Angle = 50.0f;
     static Animator animator;
     private Vector3 StartPosition;
     private Quaternion StartRotation;
@@ -95,7 +99,7 @@ public class Enemy : MonoBehaviour
         {
             Vector3 direction = player.position - this.transform.position;
             float angle = Vector3.Angle(direction, this.transform.forward);
-            if (Vector3.Distance(player.position, this.transform.position) < 10 && angle < 40)
+            if (Vector3.Distance(player.position, this.transform.position) < Range && angle < Angle)
             {
 
                 direction.y = 0;

@@ -1415,6 +1415,21 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114286476974870212, guid: 661bbcda48aa1f145bb944c926f47e28,
+        type: 2}
+      propertyPath: Health
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114286476974870212, guid: 661bbcda48aa1f145bb944c926f47e28,
+        type: 2}
+      propertyPath: Range
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 114286476974870212, guid: 661bbcda48aa1f145bb944c926f47e28,
+        type: 2}
+      propertyPath: Angle
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 661bbcda48aa1f145bb944c926f47e28, type: 2}
   m_IsPrefabAsset: 0
