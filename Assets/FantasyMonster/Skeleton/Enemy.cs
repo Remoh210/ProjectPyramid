@@ -43,6 +43,8 @@ public class Enemy : MonoBehaviour
         {
             Health -= 25.0f;
             animator.Play("Damage");
+            AudioSource[] fireAudio = col.gameObject.GetComponents<AudioSource>();
+            fireAudio[1].Play();
         }
     }
 

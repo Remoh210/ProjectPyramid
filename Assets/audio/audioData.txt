@@ -1,0 +1,6 @@
+Source Object: Player
+Sound Folder: Music
+Sound Files: BGMusic.mp3
+Source Object: Fireball
+Sound Folder: Fireball
+Sound Files: FireballCast.wav, FireballExplosion.wav
