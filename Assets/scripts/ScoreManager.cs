@@ -15,6 +15,8 @@ public class ScoreManager : MonoBehaviour {
     GameObject textbox;
     Text gameOver;
 
+    bool changedText = false;
+
 	// Use this for initialization
 	void Start () {
         textbox = GameObject.Find("Score");
@@ -59,6 +61,18 @@ public class ScoreManager : MonoBehaviour {
 
             if (blackscreen.color.a > 0.4f)
             {
+                if(!changedText)
+                {
+                    int highscore = PlayerPrefs.GetInt("highscore");
+                    if(highscore < score)
+                    {
+                        PlayerPrefs.SetInt("highscore", score);
+                        highscore = score;
+                    }
+                    gameOver.text = gameOver.text + "\n High Score: " + highscore.ToString();
+                    changedText = true;
+                }
+
                 float alpha = gameOver.color.a + (Time.deltaTime * 0.25f);
                 if (alpha > 1.0f)
                     alpha = 1.0f;
