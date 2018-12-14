@@ -91,17 +91,17 @@ public class Health_Damage_collisions : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (Healthbar.value <= 0.03)
+        if (Healthbar.value <= 0.001f)
         {
-            //Respawn();
-            //if (Input.GetKeyDown("up"))
-            //{
-            //    IsPlayerDead = false;
-            //    GetComponent<Animator>().SetBool("IsDead", IsPlayerDead);
-            //    transform.position = StartPos;
-            //    transform.rotation = StartRot;
-            //    Healthbar.value = 0.2f;
-            //}
+            Respawn();
+            if (Input.GetKeyDown("up"))
+            {
+                IsPlayerDead = false;
+                GetComponent<Animator>().SetBool("IsDead", IsPlayerDead);
+                transform.position = StartPos;
+                transform.rotation = StartRot;
+                Healthbar.value = 0.0f;
+            }
 
         }
 
